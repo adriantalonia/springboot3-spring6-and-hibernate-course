@@ -1,10 +1,15 @@
 package com.example.springbootdemo.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestRestController {
+
+    // Propertie variable
+    @Value("${test.name}")
+    private String testName;
 
     // expose "/" that return "Hello World"
     @GetMapping("/")
@@ -21,6 +26,12 @@ public class TestRestController {
     @GetMapping("/fortune")
     public String getFortune() {
         return "Today is a lucky day";
+    }
+
+    @GetMapping("/inject")
+    public String getInjectValue() {
+        return testName;
+
     }
 
 }
