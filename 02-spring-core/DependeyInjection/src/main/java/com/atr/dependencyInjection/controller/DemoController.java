@@ -12,11 +12,14 @@ public class DemoController {
     // define a private field for the dependency
     private final Coach myCoach;
 
+    private final Coach secondCoach;
+
     // controller injection
     @Autowired
-    public DemoController(/*@Qualifier("baseballCoach")*/ Coach coach) { // using Qualifier to use a specific Coach
-        System.out.println("in constructor: "+ getClass().getSimpleName());
+    public DemoController(/*@Qualifier("baseballCoach")*/ Coach coach, @Qualifier("swimCoach") Coach secondCoach) { // using Qualifier to use a specific Coach
+        System.out.println("in constructor: " + getClass().getSimpleName());
         this.myCoach = coach;
+        this.secondCoach = secondCoach;
     }
 
     // Setter injection
