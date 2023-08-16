@@ -1,9 +1,13 @@
 package com.dev.cruddemo;
 
+import com.dev.cruddemo.dao.StudentDAO;
+import com.dev.cruddemo.entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.List;
 
 @SpringBootApplication
 public class CruddemoApplication {
@@ -13,10 +17,36 @@ public class CruddemoApplication {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(String[] args) {
+    public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
             System.out.println("Hello world!");
+
+            //createStudent(studentDAO);
+            createMultipleStudents(studentDAO);
         };
+    }
+
+    private void createStudent(StudentDAO studentDAO) {
+        System.out.println("Creating a new student object...");
+        Student tempStudent = new Student("Paul", "Doe", "paul@gmail.com");
+
+        System.out.println("Saving the student...");
+        studentDAO.save(tempStudent);
+
+        System.out.println("Saved student. Generated id: "+ tempStudent.getId());
+    }
+
+    private void createMultipleStudents(StudentDAO studentDAO) {
+        System.out.println("Creating a new student object...");
+        /*Student tempStudent1 = new Student("John", "Doe", "john@gmail.com");
+        Student tempStudent2 = new Student("Mary", "Public", "mary@gmail.com");
+        Student tempStudent3 = new Student("Bonita", "Apple", "bonita@gmail.com");*/
+
+        List<Student> students = List.of(new Student("John", "Doe", "john@gmail.com"),
+                new Student("Mary", "Public", "mary@gmail.com"), new Student("Bonita", "Apple", "bonita@gmail.com"));
+
+        System.out.println("Saving the student...");
+        students.forEach(studentDAO::save);
     }
 
 }
