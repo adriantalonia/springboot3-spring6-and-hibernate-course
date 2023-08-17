@@ -22,7 +22,9 @@ public class CruddemoApplication {
             System.out.println("Hello world!");
 
             //createStudent(studentDAO);
-            createMultipleStudents(studentDAO);
+            //createMultipleStudents(studentDAO);
+            //readStudent(studentDAO);
+            queryStudents(studentDAO);
         };
     }
 
@@ -47,6 +49,20 @@ public class CruddemoApplication {
 
         System.out.println("Saving the student...");
         students.forEach(studentDAO::save);
+    }
+
+    private void readStudent(StudentDAO studentDAO) {
+        System.out.println("Retrieving student with id: " + 1);
+        Student student = studentDAO.findById(1);
+        System.out.println("Found the student: " + student);
+    }
+
+    private void queryStudents(StudentDAO studentDAO) {
+        List<Student> students = studentDAO.findAll();
+        students.forEach(System.out::println);
+        System.out.println();
+        students = studentDAO.findByLastName("Doe");
+        students.forEach(System.out::println);
     }
 
 }
