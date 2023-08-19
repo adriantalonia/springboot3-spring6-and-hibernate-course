@@ -22,7 +22,7 @@ public class CruddemoApplication {
             System.out.println("Hello world!");
 
             //createStudent(studentDAO);
-            createMultipleStudents(studentDAO);
+            //createMultipleStudents(studentDAO);
             //readStudent(studentDAO);
             //queryStudents(studentDAO);
             //updateStudent(studentDAO);
